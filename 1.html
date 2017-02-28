@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas幻灯片</title>
+</head>
+
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}	
+	#bg{
+		position: relative;	
+		width: 100%;
+		height: 100%;
+		border: #D15C5E solid 1px;
+		background-image: url(Prize.jpg);
+		background-size: cover;
+	}
+	#bg div{
+		position: absolute;
+		top:100px;
+		left: calc(50% - 110px);
+		width: 220px;
+		height: 90px;
+		background-color: #AE2A7E;
+		color: aliceblue;
+		text-align: center;
+		line-height: 90px;
+		font-size: 25px;
+	}
+	canvas { 
+		position: absolute;
+		top:100px;
+		left: calc(50% - 110px);	
+	}
+</style>
+<body>
+	<div id="bg">
+		<div id="prize">谢谢惠顾</div>
+		<canvas id="mycanvas" width="220" height="90" >你的浏览器不支持canvas</canvas>
+	</div>
+	
+</body>
+
+
+<script type="text/javascript">		
+	var can =document.getElementById("mycanvas");
+	var ctx = can.getContext("2d");
+	var w = 220 ,h =90;
+	document.getElementById("bg").width =window.innerWidth;
+	ctx.fillStyle ="#999";
+	ctx.fillRect(0,0,w,h);
+	can.addEventListener("touchstart",start,false);
+	can.addEventListener("touchmove",move,false);
+	can.addEventListener("touchend",end,false);
+	
+	function start(e){
+		var startX =e.touches[0].clientX-16;
+		var startY =e.touches[0].clientY-97;
+		ctx.beginPath();		
+		ctx.moveTo(startX,startY);
+		ctx.lineCap ="round";
+		ctx.lineJoin ="round";		
+		ctx.lineWidth = 20;
+		ctx.globalCompositeOperation ="destination-out"
+		
+	}
+	
+	function move(e){
+		var moveX =e.touches[0].clientX-16;
+		var moveY =e.touches[0].clientY-97;
+		ctx.lineTo(moveX,moveY);		
+		ctx.stroke();		
+	}
+	function end(e){		
+		var data = ctx.getImageData(0,0,w,h).data; 
+    	console.log(data.length)
+		for(var i=0,j=0;i<data.length;i+=4){
+			if(data[i] && data[i+1] && data[i+2] && data[i+3]){
+				j++;
+			}
+		}
+		//当图层被擦除剩余80%时触发
+		if(j<=w*h*0.8){
+			ctx.clearRect(0,0,w,h);
+		}
+	}
+	
+	window.onload = function(){
+		var arr = ['一等奖','二等奖','三等奖','谢谢惠顾','谢谢惠顾','谢谢惠顾','谢谢惠顾']
+		var i = Math.floor(Math.random()*arr.length);
+		document.getElementById("prize").innerHTML = arr[i];
+	}
+</script>
+
+</html>
