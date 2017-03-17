@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ip138获取IP信息</title>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body id="bd">
+<h1 id='h1'></h1> 
+<script>	
+	$.ajax({
+    'url':'http://api.ip138.com/query/',
+    'data':{
+        'ip':'', //为空即为当前iP地址
+        'oid':'7926',
+        'mid':'71018',
+        'token':'5860ef2ed6f7b98d56458459ff457b96'  //不安全，请定期刷新token，建议进行文件压缩
+    },
+    'dataType':'jsonp',
+    'success':function(json){
+    	h1.innerHTML =json.data[0]+'-'+json.data[1]+'-'+json.data[2]+'-'+json.data[3]+'-ip地址:'+json.ip;    	
+    }
+});
+</script>
+
+</body>
+</html>

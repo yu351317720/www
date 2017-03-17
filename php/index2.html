@@ -1,0 +1,30 @@
+<!doctype html>
+<html>    
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />         
+
+</head>    
+<body>
+<input type="text" id="test" placeholder="输入内容" value="">
+</body>
+<script>
+	
+		
+			Object.prototype.trim = function () {
+				return this.replace(/^\s+|\s+$/g,'');
+			};
+	
+	//正则去前后空格
+	
+	
+	
+	
+	var input1 =document.getElementById('test'),str;
+	
+	input1.onkeyup=function(){
+		 str =toString(input1.value);
+	}
+	console.log(str)
+	console.log(str.trim);
+</script>
+</html>

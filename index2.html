@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 
 <!-- 设置文档宽度、是否缩放 -->
-<title>canvas刮奖效果</title>
+<title>canvas刮奖效果by陈宇</title>
 </head>
 <style type="text/css">
 * {
@@ -41,7 +41,8 @@ p {
 }
 </style>
 <body>
-<p>手机浏览</p>
+<p>用手机浏览:</p>
+<p>一等奖概率1/100 二等奖1/50 三等级1/10</p>
 <div id="bg">
   <div id="prize"></div>
   <canvas id="mycanvas" width="500" height="300">你的浏览器不支持canvas</canvas>
@@ -81,8 +82,10 @@ function end(e) {
 			j++;
 		}
 	}
-	console.log("总面积:"+w*h+"   涂抹面积:"+(w*h-j));//理解为未被涂抹的剩余面积
-	if(j<=w*h*0.5) {
+	console.log("总面积:"+w*h+"   涂抹面积:"+(w*h-j));
+	var a = w*h-j; //j理解为未被涂抹的剩余面积
+	var b = w*h;
+	if(a>b*0.2) {
 		ctx.clearRect(0, 0, w, h);
 	}
 }
@@ -102,7 +105,7 @@ window.onload = function() {
 			console.log("i=0-->"+rd)
 	  break;
 	case 1://设置二等奖概率
-	  		if(rd < 30){
+	  		if(rd < 50){
 				i=1
 			}else{
 				i=length-1
@@ -110,7 +113,7 @@ window.onload = function() {
 			console.log("i=1-->"+rd)
 	  break;
 	 case 2://设置三等奖概率
-	  		if(rd < 50){
+	  		if(rd < 100){
 				i=2
 			}else{
 				i=length-1
@@ -118,7 +121,7 @@ window.onload = function() {
 			console.log("i=2-->"+rd)
 	  break;
 	default:
-	  console.log("没有中奖的:"+i)
+	  console.log("没有中奖的i:"+i)
 	}
 	document.getElementById("prize").innerHTML = arr[i];
 }

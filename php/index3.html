@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>获取淘宝IP地址库</title>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+<script>
+	var wwip="", oScript;	
+	function  myJsonp(){			
+		
+			
+			if(oScript) {//如果存在先移除
+                    document.body.removeChild(oScript);
+             }
+			oScript = document.createElement('script');
+			oScript.src = 'http://smart-ip.net/geoip-json?callback=fn';
+        	document.body.appendChild(oScript);
+			
+	 }	
+	 	myJsonp();
+	 function fn(data){ 
+                    alert( data.host); 
+                    wwip=data.host; 
+                } 
+</script>
+
+
+</body>
+</html>

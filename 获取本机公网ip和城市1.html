@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>keleyi获取IP</title>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://tool.keleyi.com/ip/visitoriphost/"></script> 
+</head>
+<body id="bd">
+<span id='keleyivisitorip'></span>
+<ip id='ip'></ip>
+<script>	
+	setTimeout(sync,1)
+	function sync(){ 
+		var _ip = document.getElementById('keleyivisitorip').innerHTML;
+		//console.log(ip)
+		$.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='+_ip,
+		 function(_result){ 
+		 console.log(remote_ip_info) ;
+        	ip.innerHTML= remote_ip_info.country+'-'+remote_ip_info.province+'-'+remote_ip_info.city;   
+        	//数据来自keleyi的ip数据，不一定准确
+		});
+	}	
+</script>
+
+</body>
+</html>
